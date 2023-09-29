@@ -76,8 +76,13 @@ class Parser
      */
     public function parseFile(string $filename): Document
     {
-        $content = file_get_contents($filename);
-
+           $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        ); 
+       $content = file_get_contents($filename , false, stream_context_create($arrContextOptions));
         /*
          * 2018/06/20 @doganoo as multiple times a
          * users have complained that the parseFile()
